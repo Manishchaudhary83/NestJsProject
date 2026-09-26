@@ -3,6 +3,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import databaseConfig from './config/database.config.js';
 import {validate} from './config/env.validation.js'
+import { Usersmodule } from './users/users.module.js';
+import { OrganizationModule } from './organizations/organization.module.js';
+import { AuthModule } from './auth/auth.module.js';
 
 
 @Module({
@@ -29,11 +32,11 @@ import {validate} from './config/env.validation.js'
         autoLoadEntities: true,
         synchronize: true
 
-      })
-
-
-
-    })
+      }),
+    }),
+    Usersmodule,
+    OrganizationModule,
+    AuthModule
   ],
   controllers: [],
   providers: [],
