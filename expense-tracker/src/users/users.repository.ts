@@ -19,4 +19,15 @@ export class UsersRepository{
       where: {email:email}
     })
   }
+
+  async findById(id:string): Promise<User|null>{
+    return this.userRepository.findOne({
+      where: {id}
+    })
+
+  }
 }
+
+
+
+ 

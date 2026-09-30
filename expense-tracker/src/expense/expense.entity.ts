@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { User } from "../users/users.entity.js";
 
 
 @Entity("expenses")
@@ -14,15 +15,25 @@ export class Expenses{
   @Column("decimal", { precision: 10, scale: 2 })
   amount: number
 
-  @Column()
+  @Column({nullable: true})
   description: string
 
-  @Column()
+
+  @Column({type: 'date'})
   expenseDate:string
+
+  @Column()
+userId: string
+
+@ManyToOne(
+    () => User
+  )
+@JoinColumn({name: 'userId'})
+user: User
 
   @CreateDateColumn()
   createdAt: Date
 
-  @CreateDateColumn()
-  updatedAt: Date
+  @UpdateDateColumn()
+updatedAt: Date;
 }

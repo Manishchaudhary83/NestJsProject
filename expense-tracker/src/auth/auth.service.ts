@@ -39,7 +39,12 @@ export class AuthService{
     message: "User login successfully",
     accessToken,
     refreshToken,
-    user
+    user:{
+      id: user.id,
+      fullName: user.fullName,
+      email: user.email,
+
+    }
   }
 
  }

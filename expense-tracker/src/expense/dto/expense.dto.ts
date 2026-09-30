@@ -5,7 +5,7 @@ export class ExpenseDto{
 
   @IsString()
   @IsNotEmpty()
-  title:String
+  title:string
 
 
   @IsNumber()

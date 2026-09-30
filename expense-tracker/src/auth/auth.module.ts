@@ -7,6 +7,8 @@ import { JwtModule } from "@nestjs/jwt";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { Usersmodule } from "../users/users.module.js";
 
+import { AuthMiddleware } from "./auth.middleware.js";
+
 
 @Module({
   imports:[Usersmodule,
@@ -16,13 +18,15 @@ import { Usersmodule } from "../users/users.module.js";
       inject: [ConfigService],
 
       useFactory: (configService: ConfigService) => ({
-        secret: configService.getOrThrow<string>('JWT_SECRET'),
+        secret: configService.getOrThrow<string>('app.jwtSecret'),
       }),
     }),
 
   ],
-providers: [AuthService, TokenService],
-controllers: [AuthController]
+providers: [AuthService, TokenService, AuthMiddleware],
+controllers: [AuthController],
+
+exports: [AuthMiddleware]
 })
 
 export class AuthModule{}
